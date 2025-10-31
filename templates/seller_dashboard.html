@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: url('https://png.pngitem.com/pimgs/s/526-5269738_bmw-530e-plug-in-hybrid-hd-png-download.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #22385c;
+  }
+  .dashboard-container {
+    background: rgba(255, 255, 255, 0.90);
+    padding: 30px 24px;
+    border-radius: 18px;
+    margin-top: 32px;
+    box-shadow: 0 8px 28px rgba(44,44,44,0.12);
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h3 {
+    font-weight: 700;
+    margin-bottom: 22px;
+    letter-spacing: 0.7px;
+  }
+  h5 {
+    color: #22385c;
+    margin-top: 32px;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .btn-primary {
+    border-radius: 28px;
+    padding: 12px 24px;
+    font-weight: 600;
+    background-color: #ff6f61;
+    border-color: #ff6f61;
+    box-shadow: 0 6px 18px rgba(255,111,97,0.4);
+    margin-bottom: 18px;
+  }
+  .btn-primary:hover, .btn-primary:focus {
+    background-color: #ff5543;
+    border-color: #ff5543;
+  }
+  table.table thead th {
+    background: #f3f6fc;
+    color: #22385c;
+    font-weight: 600;
+    border-bottom: 2px solid #1164ff;
+  }
+  table.table tbody td {
+    vertical-align: middle;
+    color: #33475b;
+  }
+</style>
+
+<div class="dashboard-container">
+  <h3>Seller Dashboard</h3>
+  <a class="btn btn-primary mb-2" href="{{ url_for('seller_add') }}">Add Car</a>
+  
+  <h5>My Cars</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Approved</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in mycars %}
+      <tr>
+        <td>{{c.id}}</td>
+        <td>{{c.brand}}</td>
+        <td>{{c.model}}</td>
+        <td>{{ 'Yes' if c.is_approved else 'No' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  <h5>Orders for My Cars</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Order</th>
+        <th>Car</th>
+        <th>Buyer</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Delivery</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for o in orders %}
+      <tr>
+        <td>{{o.id}}</td>
+        <td>{{o.brand}} {{o.model}}</td>
+        <td>{{o.buyer_name}}</td>
+        <td>{{o.buyer_phone}}</td>
+        <td>{{o.buyer_address}}</td>
+        <td>{{o.delivery_date}}</td>
+        <td>{{o.status}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

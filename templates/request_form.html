@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: url('https://t3.ftcdn.net/jpg/06/36/01/48/360_F_636014891_ne8XUB4YU4WoMeUUjr0TU6wH38wNTU6V.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #22385c;
+  }
+  form {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 28px 24px;
+    border-radius: 18px;
+    box-shadow: 0 8px 28px rgba(44,44,44,0.13);
+    max-width: 720px;
+    margin-top: 32px;
+  }
+  h3 {
+    font-weight: 700;
+    margin-bottom: 22px;
+    letter-spacing: 0.7px;
+  }
+  label {
+    font-weight: 600;
+    color: #33475b;
+    margin-bottom: 8px;
+  }
+  .form-control {
+    border-radius: 14px;
+    font-size: 1rem;
+    padding: 10px 16px;
+  }
+  .btn-primary {
+    border-radius: 28px;
+    padding: 14px 0;
+    font-weight: 600;
+    background-color: #ff6f61;
+    border-color: #ff6f61;
+    box-shadow: 0 6px 16px rgba(255,111,97,0.45);
+    width: 100%;
+    font-size: 1.1rem;
+    margin-top: 16px;
+  }
+  .btn-primary:hover, .btn-primary:focus {
+    background-color: #ff5543;
+    border-color: #ff5543;
+  }
+</style>
+
+<h3>Request to Order: {{car.brand}} {{car.model}}</h3>
+<form method="post" class="row g-3">
+  <div class="col-md-6">
+    <label>Your Full Name</label>
+    <input name="buyer_name" class="form-control" required>
+  </div>
+  <div class="col-md-6">
+    <label>Phone</label>
+    <input name="buyer_phone" class="form-control" required>
+  </div>
+  <div class="col-md-12">
+    <label>Address</label>
+    <input name="buyer_address" class="form-control" required>
+  </div>
+  <div class="col-md-6">
+    <label>Desired Delivery Date</label>
+    <input name="delivery_date" type="date" class="form-control" required>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary">Submit Request</button>
+  </div>
+</form>
+{% endblock %}

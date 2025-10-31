@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: url('https://png.pngtree.com/thumb_back/fh260/background/20230705/pngtree-d-rendering-of-a-super-sports-car-against-a-white-background-image_3822906.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #22385c;
+  }
+  .table-container {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 28px 24px;
+    border-radius: 18px;
+    margin-top: 30px;
+    box-shadow: 0 8px 28px rgba(44,44,44,0.12);
+  }
+  h3 {
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 0.7px;
+  }
+  table.table thead th {
+    background: #f3f6fc;
+    color: #22385c;
+    font-weight: 600;
+    border-bottom: 2px solid #1164ff;
+  }
+  table.table tbody td {
+    vertical-align: middle;
+    color: #33475b;
+  }
+</style>
+
+<h3>My Requests</h3>
+<div class="table-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Order</th>
+        <th>Car</th>
+        <th>Seller</th>
+        <th>Address</th>
+        <th>Delivery</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for o in orders %}
+      <tr>
+        <td>{{o.id}}</td>
+        <td>{{o.brand}} {{o.model}}</td>
+        <td>{{o.seller_name or '(system)'}}</td>
+        <td>{{o.buyer_address}}</td>
+        <td>{{o.delivery_date}}</td>
+        <td>{{o.status}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

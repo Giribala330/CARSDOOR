@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  body {
+    background: url('https://www.shutterstock.com/image-photo/group-multi-colored-modern-cars-600nw-197733737.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+  h3 {
+    font-weight: 600;
+    color: #22385c;
+    margin-bottom: 22px;
+    letter-spacing: 1px;
+  }
+  .card {
+    border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(44,44,44,0.10);
+    background: rgba(255,255,255,0.96);
+    border: none;
+    min-height: 200px;
+    transition: box-shadow .2s;
+  }
+  .card:hover {
+    box-shadow: 0 16px 36px rgba(33,33,109,0.14);
+  }
+  .card h5 {
+    font-size: 1.25rem;
+    color: #1164ff;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .card p {
+    color: #495c6e;
+    font-size: 1rem;
+    margin: 0 0 9px 0;
+  }
+  .card .btn-primary {
+    border-radius: 24px;
+    font-weight: 500;
+    background: #1164ff;
+    border: none;
+    padding: 9px 20px;
+  }
+  form.d-flex {
+    margin-bottom: 28px;
+  }
+  .form-select,
+  .form-control {
+    border-radius: 12px;
+    font-size: 1.07rem;
+    margin-right: 7px;
+    min-width: 120px;
+  }
+  .btn-outline-secondary {
+    border-radius: 24px;
+    font-weight: 500;
+    padding: 9px 18px;
+  }
+</style>
+
+<h3>Buyer Dashboard</h3>
+<form method="get" class="d-flex gap-2 mb-3">
+  <select name="brand" class="form-select">
+    <option value=''>All brands</option>
+    {% for b in brands %}
+      <option value='{{b}}' {% if sel_brand==b %}selected{% endif %}>{{b}}</option>
+    {% endfor %}
+  </select>
+  <select name="year" class="form-select">
+    <option value=''>All years</option>
+    {% for y in years %}
+      <option value='{{y}}' {% if sel_year==y|string %}selected{% endif %}>{{y}}</option>
+    {% endfor %}
+  </select>
+  <input name="q" value="{{q}}" class="form-control" placeholder="Search">
+  <button class="btn btn-outline-secondary">Filter</button>
+</form>
+<div class="row">
+  {% for c in cars %}
+    <div class="col-md-4">
+      <div class="card mb-3 p-3">
+        <h5>{{c.brand}} {{c.model}}</h5>
+        <p>{{c.model_year}} - {{c.milage}} km - {{c.fuel_type}}</p>
+        <p>Seller: {{c.seller_name or '(not assigned)'}} - {{c.seller_phone or ''}}</p>
+        <a class="btn btn-primary" href="{{ url_for('request_order', car_id=c.id) }}">Request to Order</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

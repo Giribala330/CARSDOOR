@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: url('https://png.pngtree.com/background/20250227/original/pngtree-d-illustration-of-a-sleek-yellow-sports-car-with-lightning-speed-picture-image_13301745.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #22385c;
+  }
+  .card {
+    background: rgba(255, 255, 255, 0.93);
+    padding: 30px 26px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(44,44,44,0.11);
+    margin-top: 40px;
+  }
+  h3 {
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 0.7px;
+  }
+  label {
+    font-weight: 600;
+    color: #33475b;
+  }
+  .form-control, select.form-select {
+    border-radius: 14px;
+    font-size: 1rem;
+    padding: 10px 16px;
+  }
+  .btn-primary {
+    border-radius: 28px;
+    padding: 12px 0;
+    font-weight: 600;
+    background-color: #ff6f61;
+    border-color: #ff6f61;
+    min-width: 140px;
+    box-shadow: 0 6px 15px rgba(255,111,97,0.4);
+  }
+  .btn-primary:hover, .btn-primary:focus {
+    background-color: #ff5543;
+    border-color: #ff5543;
+  }
+</style>
+
+<div class="row justify-content-center">
+  <div class="col-md-8 card p-3">
+    <h3>Register</h3>
+    <form method="post" class="row g-3">
+      <div class="col-md-3">
+        <label>Role</label>
+        <select name="role" class="form-select">
+          <option value="buyer">Buyer</option>
+          <option value="seller">Seller</option>
+        </select>
+      </div>
+      <div class="col-md-9">
+        <label>Name</label>
+        <input name="name" class="form-control" required>
+      </div>
+      <div class="col-md-6">
+        <label>Email</label>
+        <input name="email" class="form-control" type="email" required>
+      </div>
+      <div class="col-md-6">
+        <label>Password</label>
+        <input name="password" class="form-control" type="password" required>
+      </div>
+      <div class="col-md-8">
+        <label>Address</label>
+        <input name="address" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <label>Phone</label>
+        <input name="phone" class="form-control">
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary">Register</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

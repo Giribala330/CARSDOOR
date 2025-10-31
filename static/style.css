@@ -1,0 +1,5 @@
+
+body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(120deg,#041022 0%, #072235 100%); color:#fff; }
+.header { text-align:center; padding:20px 0; color:#00d1ff; }
+.card { background: rgba(255,255,255,0.95); color:#082028; border-radius:10px; }
+.btn-primary { background:#00aaff; border:none; }

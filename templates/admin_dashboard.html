@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  body {
+    background: url('https://img.freepik.com/free-photo/3d-car-with-simple-background_23-2150796882.jpg?semt=ais_hybrid&w=740&q=80') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  .card-section {
+    background: rgba(255,255,255,0.92);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(33,33,33,0.12);
+    padding: 32px;
+    margin-top: 24px;
+  }
+  .btn-nav {
+    border-radius: 30px;
+    font-weight: 500;
+    padding: 9px 28px;
+    margin-right: 12px;
+    box-shadow: 0 2px 6px rgba(44,44,44,0.11);
+    transition: background 0.25s;
+  }
+  .btn-nav.active, .btn-nav:hover {
+    background: #1164ff;
+    color: #fff;
+    border-color: #1164ff;
+  }
+  h2 {
+    font-size: 2.2rem;
+    margin-bottom: 24px;
+    font-weight: 700;
+    color: #222c4b;
+    text-shadow: 1px 1px 8px #fff, 0 0 2px #222;
+  }
+  h4 {
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+    font-weight: 600;
+    color: #222c4b;
+  }
+  .table th {
+    background: #f3f6fc;
+    color: #22385c;
+    font-weight: 500;
+  }
+  .table td, .table th {
+    vertical-align: middle !important;
+  }
+</style>
+
+<div class="container-fluid">
+  <div class="py-3">
+    <h2>CarConnect Admin Panel</h2>
+    <div class="d-flex mb-2">
+      <button id="btn-reg" class="btn btn-nav active">Registration Confirmation</button>
+      <button id="btn-assign" class="btn btn-nav">Assign Seller</button>
+      <button id="btn-pending" class="btn btn-nav">Pending Orders</button>
+    </div>
+  </div>
+
+  <div id="sect-reg" class="card-section">
+    <h4>Registration Confirmation</h4>
+    <table class="table table-striped table-hover rounded">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in pending_users %}
+        <tr>
+          <td>{{u.name}}</td>
+          <td>{{u.email}}</td>
+          <td>{{u.role}}</td>
+          <td>
+            <a class="btn btn-success btn-sm rounded-pill" href="{{ url_for('approve_user', user_id=u.id) }}">
+              Approve
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div id="sect-assign" class="card-section" style="display:none;">
+    <h4>Assign Seller / Approve Cars</h4>
+    <table class="table table-striped table-hover rounded">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Assign</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in pending_cars %}
+        <tr>
+          <td>{{c.id}}</td>
+          <td>{{c.brand}}</td>
+          <td>{{c.model}}</td>
+          <td>
+            <form method="post" action="{{ url_for('approve_car', car_id=c.id) }}" class="d-flex">
+              <select name="seller_id" class="form-select me-2" style="border-radius:12px;">
+                <option value="">(no assign)</option>
+                {% for s in sellers %}
+                <option value="{{s.id}}">{{s.name}}</option>
+                {% endfor %}
+              </select>
+              <button class="btn btn-primary btn-sm rounded-pill">Approve & Assign</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div id="sect-pending" class="card-section" style="display:none;">
+    <h4>Pending Orders</h4>
+    <table class="table table-striped table-hover rounded">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Car</th>
+          <th>Buyer</th>
+          <th>Phone</th>
+          <th>Address</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for o in pending_orders %}
+        <tr>
+          <td>{{o.id}}</td>
+          <td>{{o.brand}} {{o.model}}</td>
+          <td>{{o.buyer_name}}</td>
+          <td>{{o.buyer_phone}}</td>
+          <td>{{o.buyer_address}}</td>
+          <td>{{o.delivery_date}}</td>
+          <td>
+            <form method="post" action="{{ url_for('admin_order_action', order_id=o.id) }}">
+              <button name="action" value="confirm" class="btn btn-success btn-sm rounded-pill">Confirm</button>
+              <button name="action" value="cancel" class="btn btn-danger btn-sm rounded-pill ms-1">Reject</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  document.getElementById('btn-reg').onclick = function(){
+    document.getElementById('sect-reg').style.display='block';
+    document.getElementById('sect-assign').style.display='none';
+    document.getElementById('sect-pending').style.display='none';
+    document.getElementById('btn-reg').classList.add('active');
+    document.getElementById('btn-assign').classList.remove('active');
+    document.getElementById('btn-pending').classList.remove('active');
+  }
+  document.getElementById('btn-assign').onclick = function(){
+    document.getElementById('sect-reg').style.display='none';
+    document.getElementById('sect-assign').style.display='block';
+    document.getElementById('sect-pending').style.display='none';
+    document.getElementById('btn-assign').classList.add('active');
+    document.getElementById('btn-reg').classList.remove('active');
+    document.getElementById('btn-pending').classList.remove('active');
+  }
+  document.getElementById('btn-pending').onclick = function(){
+    document.getElementById('sect-reg').style.display='none';
+    document.getElementById('sect-assign').style.display='none';
+    document.getElementById('sect-pending').style.display='block';
+    document.getElementById('btn-pending').classList.add('active');
+    document.getElementById('btn-reg').classList.remove('active');
+    document.getElementById('btn-assign').classList.remove('active');
+  }
+</script>
+{% endblock %}

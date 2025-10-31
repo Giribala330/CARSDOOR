@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: url('https://carconfigurator.ferrari.com/rt-assets/data/cars/849testarossaspider/ui/splashpage.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .centered-buttons {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .btn {
+    min-width: 220px;
+    padding: 14px 0;
+    font-size: 1.1rem;
+    border-radius: 28px;
+    font-weight: 600;
+    text-decoration: none !important;
+    background-color: #ff6f61;
+    border: 2px solid #ff6f61;
+    color: #000000;
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 6px 20px rgba(255, 111, 97, 0.35);
+  }
+
+  .btn:hover, .btn:focus {
+    background-color: #ff5543;
+    border-color: #ff5543;
+    box-shadow: 0 8px 30px rgba(255, 85, 67, 0.6);
+    color: #000000;
+    text-decoration: none !important;
+  }
+
+  h1 {
+    text-align: center;
+    color: white;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+</style>
+
+<div class="centered-buttons">
+  <h1>CARSDOOR</h1>
+  <a class="btn" href="{{ url_for('login') }}?as=buyer">Login as Buyer</a>
+  <a class="btn" href="{{ url_for('login') }}?as=seller">Login as Seller</a>
+  <a class="btn" href="{{ url_for('login') }}?as=admin">Login as Admin</a>
+  <a class="btn" href="{{ url_for('register') }}">Register</a>
+</div>
+{% endblock %}

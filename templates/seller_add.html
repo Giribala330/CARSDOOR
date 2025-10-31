@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: url('https://cdn.pixabay.com/photo/2020/02/06/02/17/car-4822840_640.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #22385c;
+  }
+  form {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 32px 28px;
+    border-radius: 18px;
+    box-shadow: 0 8px 28px rgba(44,44,44,0.14);
+    max-width: 720px;
+    margin-top: 32px;
+  }
+  h3 {
+    font-weight: 700;
+    margin-bottom: 22px;
+    letter-spacing: 0.7px;
+  }
+  label {
+    font-weight: 600;
+    color: #33475b;
+    margin-bottom: 8px;
+  }
+  .form-control {
+    border-radius: 14px;
+    font-size: 1rem;
+    padding: 10px 16px;
+  }
+  .btn-primary {
+    border-radius: 28px;
+    padding: 14px 0;
+    font-weight: 600;
+    background-color: #ff6f61;
+    border-color: #ff6f61;
+    box-shadow: 0 6px 18px rgba(255,111,97,0.42);
+    width: 100%;
+    font-size: 1.1rem;
+    margin-top: 16px;
+  }
+  .btn-primary:hover, .btn-primary:focus {
+    background-color: #ff5543;
+    border-color: #ff5543;
+  }
+</style>
+
+<h3>Add Car</h3>
+<form method="post" class="row g-3">
+  <div class="col-md-6">
+    <label>Brand</label>
+    <input name="brand" class="form-control">
+  </div>
+  <div class="col-md-6">
+    <label>Model</label>
+    <input name="model" class="form-control">
+  </div>
+  <div class="col-md-6">
+    <label>Year</label>
+    <input name="model_year" class="form-control">
+  </div>
+  <div class="col-md-6">
+    <label>Milage</label>
+    <input name="milage" class="form-control">
+  </div>
+  <div class="col-md-6">
+    <label>Fuel Type</label>
+    <input name="fuel_type" class="form-control">
+  </div>
+  <div class="col-md-6">
+    <label>Transmission</label>
+    <input name="transmission" class="form-control">
+  </div>
+  <div class="col-md-6">
+    <label>Price</label>
+    <input name="price" class="form-control">
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary">Add Car (await admin approval)</button>
+  </div>
+</form>
+{% endblock %}
